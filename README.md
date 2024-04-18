@@ -39,6 +39,10 @@ For a detailed look at the dataset's structure and contents, please refer to the
 
 ## Dataset Example
 The following image illustrates various scenes from the WRV2 dataset, highlighting the diversity and complexity of environments in our wire removal challenges:
+<div style="text-align: center; padding: 10px;">
+    <img src="dataset_example.png" alt="Example Image 1: Original Image" style="width: 100%; height: auto;">
+    <p><strong>Figure 1:</strong> Example Image 1 - Original Image from WRV2 Dataset</p>
+</div>
 
 ## Video Demonstration
 
