@@ -1,11 +1,10 @@
 # Raformer: Redundancy-Aware Transformer for Video Wire Inpainting
-This repository includes implementations and resources for the Raformer model, designed specifically for tackling the challenge of wire removal in video sequences, as demonstrated in our dataset WRV2.
-
+Welcome to the official repository for the Raformer project. This innovative model is engineered to address the challenge of removing wires from video sequences, showcasing its capabilities through extensive testing on our Wire Removal Video Dataset 2 (WRV2).
 # Wire Removal Video Datasets 2 (WRV2)
-The Wire Removal Video Dataset 2 (WRV2) is crafted to facilitate the development and evaluation of video inpainting algorithms that specifically target wire removal. This dataset includes a variety of scenes where wire removal is challenging yet critical for visual aesthetics and practical applications.
+The WRV2 dataset is meticulously assembled to support the development and evaluation of video inpainting algorithms aimed specifically at wire removal. This challenging task is critical for enhancing visual aesthetics in various scenes.
 
 ## Dataset folder structure
-
+The dataset is organized as follows:
 ```
 Wire Removal Video Datasets 2(WRV2)
 |
@@ -36,12 +35,19 @@ Wire Removal Video Datasets 2(WRV2)
 ```
 
 Annotations within this dataset are formatted as paletted binary images where the value 1 indicates the presence of a wire that needs to be inpainted, and 0 represents no wire.
-Please see the **example_for_WRV2** folder for more details on the WRV2 dataset.
+For a detailed look at the dataset's structure and contents, please refer to the **example_for_WRV2**.
+
+## Dataset Example
+The following image illustrates various scenes from the WRV2 dataset, highlighting the diversity and complexity of environments in our wire removal challenges:
+
 ## Video Demonstration
 
 For a practical insight into the capabilities of the Raformer model and the challenges posed by wire artifacts in videos, we invite you to view our demonstration video. This video visually explains the preprocessing, challenges, and the effectiveness of the Raformer model in removing wires from video footage effectively.
 </ol>
 <div><video controls src="https://private-user-images.githubusercontent.com/101324047/323496512-324f307f-79ef-4aab-980c-8f0841d623cf.mp4" muted="false"></video></div>
+
+
+
 
 ## Looking for WRV?
 If you are interested in exploring our previous dataset, the Wire Removal Video Dataset 1 (WRV1), please visit the following link for more information and resources:
