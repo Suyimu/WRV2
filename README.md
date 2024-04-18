@@ -1,7 +1,7 @@
 # Raformer: Redundancy-Aware Transformer for Video Wire Inpainting
 Welcome to the official repository for the Raformer project. This innovative model is engineered to address the challenge of removing wires from video sequences, showcasing its capabilities through extensive testing on our Wire Removal Video Dataset 2 (WRV2).
 # Wire Removal Video Datasets 2 (WRV2)
-The WRV2 dataset is meticulously assembled to support the development and evaluation of video inpainting algorithms aimed specifically at wire removal. This challenging task is critical for enhancing visual aesthetics in various scenes.
+The WRV2 dataset is meticulously assembled to support developing and evaluating video inpainting algorithms aimed specifically at wire removal. This challenging task is critical for enhancing visual aesthetics in various scenes.
 
 ## Dataset folder structure
 The dataset is organized as follows:
