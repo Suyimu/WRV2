@@ -40,7 +40,9 @@ Annotations within this dataset are formatted as paletted binary images where th
 ## Video Demonstration
 
 For a practical insight into the capabilities of the Raformer model and the challenges posed by wire artifacts in videos, we invite you to view our demonstration video. This video visually explains the preprocessing, challenges, and the effectiveness of the Raformer model in removing wires from video footage effectively.
-<div><video controls src="video_wire_inpainting.mp4](https://github.com/Suyimu/WRV2/issues/1#issue-2249898516.mp4" muted="false"></video></div>
+</ol>
+<div><video controls src="https://user-images.githubusercontent.com/20723919/120432939-99194880-c3b5-11eb-8eea-f4aa424d479f.MP4" muted="false"></video></div>
+
 This demonstration video serves as a visual guide to understanding the types of scenarios included in the WRV2 dataset and showcases the effectiveness of our model in real-world applications.
 ## Looking for WRV?
 If you are interested in exploring our previous dataset, the Wire Removal Video Dataset 1 (WRV1), please visit the following link for more information and resources:
