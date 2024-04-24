@@ -4,6 +4,7 @@ Welcome to the official repository for the Raformer project. This innovative mod
 The WRV2 dataset is meticulously assembled to support developing and evaluating video inpainting algorithms aimed specifically at wire removal. This challenging task is critical for enhancing visual aesthetics in various scenes.
 
 To download the WRV2 dataset, please visit this [download link](https://pan.quark.cn/s/63522988eedf).
+
 For those requiring higher resolution for detailed analysis, a 4K high-definition version of the original videos is available. Due to the large size of these files, approximately 2TB, it is not feasible to offer direct downloads. Please contact the authors directly to access these files or discuss potential delivery methods.
 ## Dataset folder structure
 The dataset is organized as follows:
