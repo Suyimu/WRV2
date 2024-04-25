@@ -53,9 +53,22 @@ For a practical insight into the capabilities of the Raformer model and the chal
 </ol>
 <div><video controls src="https://private-user-images.githubusercontent.com/101324047/323496512-324f307f-79ef-4aab-980c-8f0841d623cf.mp4" muted="false"></video></div>
 
-
-
-
 ## Looking for WRV?
 If you are interested in exploring our previous dataset, the Wire Removal Video Dataset 1 (WRV1), please visit the following link for more information and resources:
 ### [https://github.com/Suyimu/Wire-removal-Dataset-for-video-inpainting]
+
+## Citation
+If this research benefits your work or involves the use of this dataset, please consider citing the following paper:
+   ```bibtex
+@misc{ji2024raformer,
+      title={Raformer: Redundancy-Aware Transformer for Video Wire Inpainting}, 
+      author={Zhong Ji and Yimu Su and Yan Zhang and Jiacheng Hou and Yanwei Pang and Jungong Han},
+      year={2024},
+      eprint={2404.15802},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
+## License
+This project is licensed under the [MIT License](LICENSE). Please refer to the LICENSE file for detailed terms.
