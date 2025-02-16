@@ -110,3 +110,8 @@ If this research benefits your work or involves the use of this dataset, please 
 
 ## License
 This project is licensed under the [MIT License](LICENSE). Please refer to the LICENSE file for detailed terms.
+
+## Acknowledgement
+
+This code is based on [E<sup>2</sup>FGVI](https://github.com/MCG-NKU/E2FGVI) and [Propainter](https://github.com/sczhou/ProPainter).
+
