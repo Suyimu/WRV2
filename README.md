@@ -1,8 +1,40 @@
 # **Raformer: Redundancy-Aware Transformer for Video Wire Inpainting**
-
+Welcome to the official repository for the Raformer project. This innovative model is engineered to address the challenge of removing wires from video sequences, showcasing its capabilities through extensive testing on our Wire Removal Video Dataset 2 (WRV2).
 We are excited to announce that the Raformer model code is now publicly available for testing. Additionally, the pre-trained model is provided. The full training code will be released within one week after the paper is officially published. 
 
-Welcome to the official repository for the Raformer project. This innovative model is engineered to address the challenge of removing wires from video sequences, showcasing its capabilities through extensive testing on our Wire Removal Video Dataset 2 (WRV2).
+# Get Started
+### 1. Clone the Repository and Navigate to the Folder
+
+```bash
+git clone https://github.com/Suyimu/WRV2.git
+cd Raformer
+```
+
+###  2. Set Up Conda Environment and Install Dependencies
+### Create and activate a new conda environment
+```bash
+conda create -n Raformer python=3.8 -y
+conda activate Raformer
+```
+### Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+- CUDA >= 9.2
+- PyTorch >= 2.0
+- Torchvision >= 0.8.2
+- Other required packages in `requirements.txt`
+     
+### Prepare Pretrained Models
+Download the pretrained models from [Releases V0.1.0](https://pan.quark.cn/s/02a9c6a1d7a6) into the `weights` folder. (Models will also be downloaded automatically during the first inference.) [Link password: 78NW]
+
+### Test
+We provide example videos in the [`inputs`](./inputs) folder. 
+Run the following command to test the model:
+```shell
+python inference_Raformer.py --video inputs/wire_removal/GT/8m56s --mask inputs/wire_removal/Wire_Masks/8m56s
+```
 
 # **Wire Removal Video Datasets 2 (WRV2)**
 
