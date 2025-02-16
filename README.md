@@ -42,8 +42,6 @@ pip install -r requirements.txt
 ### 3. Download Pre-trained Models
 Download models from **[Release V0.1.0](https://pan.quark.cn/s/02a9c6a1d7a6)** (Password: `78NW`) and place them in `./weights/`.  
 
-*First-time users*: Models will auto-download during initial inference if not found.
-
 ### 4. Run Inference
 **Example Test** (using sample data in [`inputs/`](./Raformer/inputs)):
 ```bash
@@ -69,66 +67,50 @@ Run with:
 python inference_Raformer.py --video path/to/frames --mask path/to/masks
 ```
 ---
-# **Wire Removal Video Datasets 2 (WRV2)**
+# 🎥 Wire Removal Video Dataset 2 (WRV2) 
+<div align="center">
+  <img src="dataset_example.png" width="80%" alt="WRV2 Dataset Samples">
+  <p><em>Fig.1 - Example Image 1: Original Image</em></p>
+</div>
 
-The WRV2 dataset is meticulously assembled to support developing and evaluating video inpainting algorithms aimed specifically at wire removal. This challenging task is critical for enhancing visual aesthetics in various scenes.
+## 📥 Download Links
+| Version | Size | Link | Access |
+|---------|------|------|--------|
+| Standard | 200GB | [Quark Cloud](https://pan.quark.cn/s/63522988eedf) | Direct Download |
+| 4K UHD | ~2TB | Contact Authors | Special Arrangement |
 
+**Need higher resolution?**  
+For research requiring ultra-high-definition analysis, contact us via [suyimu@tju.edu.cn] to discuss transfer options for our 4K master videos.
 
-**To download the WRV2 dataset**, please visit this [download link](https://pan.quark.cn/s/63522988eedf).
-
-For those requiring higher resolution for detailed analysis, a 4K high-definition version of the original videos is available. Due to the large size of these files, approximately 2TB, it is not feasible to offer direct downloads. Please contact the authors directly to access these files or discuss potential delivery methods.
-## Dataset folder structure
-The dataset is organized as follows:
-```
-Wire Removal Video Datasets 2(WRV2)
-|
-├── train.json
-├── test.json
-├── JPEGImages
-│   ├── yttl18-011_091
-│   │   ├── 00000.jpg
-│   │   ...
-│   │   └── 0000N.jpg
-│   ...
-│   └── 12-042706_024
+## 🗂 Dataset Structure
+```bash
+WRV2/
+├── train.json       # Training metadata
+├── test.json        # Testing metadata
+├── JPEGImages/      # Original video frames
+│   └── [video_id]/  
 │       ├── 00000.jpg
-│       ...
-│       └── 0000N.jpg
-│
-└── test_masks
-    ├── yttl18-011_091
-    │   ├── 00000.png
-    │   ...
-    │   └── 0000N.png
-    ...
-    └── 12-042706_024
-        ├── 00000.png
-        ...
-        └── 0000N.png
-
+│       └── ...      # Sequential frames
+└── test_masks/      # Binary wire masks
+    └── [video_id]/  
+        ├── 00000.png  # 0=background, 1=wire
+        └── ...      
 ```
-
 Annotations within this dataset are formatted as paletted binary images where the value 1 indicates the presence of a wire that needs to be inpainted, and 0 represents no wire.
 For a detailed look at the dataset's structure and contents, please refer to the **example_for_WRV2**.
 
-## Dataset Example
-The following image illustrates various scenes from the WRV2 dataset, highlighting the diversity and complexity of environments in our wire removal challenges:
-<div style="text-align: center; padding: 10px;">
-    <img src="dataset_example.png" alt="Example Image 1: Original Image" style="width: 100%; height: auto;">
-    <p><strong>Figure 1:</strong> Example Image 1 - Original Image from WRV2 Dataset</p>
-</div>
-
-## Video Demonstration
-
+## 🎬 Video Demonstration
 For a practical insight into the capabilities of the Raformer model and the challenges posed by wire artifacts in videos, we invite you to view our demonstration video. This video visually explains the preprocessing, challenges, and the effectiveness of the Raformer model in removing wires from video footage effectively.
 </ol>
 <div><video controls src="https://private-user-images.githubusercontent.com/101324047/323496512-324f307f-79ef-4aab-980c-8f0841d623cf.mp4" muted="false"></video></div>
+**Click to watch demonstration video**
 
-## Looking for WRV?
-If you are interested in exploring our previous dataset, the Wire Removal Video Dataset 1 (WRV1), please visit the following link for more information and resources:
-### [https://github.com/Suyimu/Wire-removal-Dataset-for-video-inpainting]
+## 📚 Related Resources
+### Previous Version Dataset
+[![WRV1 Badge](https://img.shields.io/badge/Dataset-WRV1-blue)](https://github.com/Suyimu/Wire-removal-Dataset-for-video-inpainting)  
+Explore our initial wire removal benchmark dataset with different challenge configurations.
 
-## Citation
+## 📜 Citation
 If this research benefits your work or involves the use of this dataset, please consider citing the following paper:
    ```bibtex
 @misc{ji2024raformer,
@@ -141,10 +123,18 @@ If this research benefits your work or involves the use of this dataset, please 
 }
 ```
 
-## License
-This project is licensed under the [MIT License](LICENSE). Please refer to the LICENSE file for detailed terms.
+## 📃 License
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
+This dataset is released for **academic research only**. Commercial use requires written permission.
 
-## Acknowledgement
+## 🙏 Acknowledgement
+We build upon these excellent works:
+- [E²FGVI](https://github.com/MCG-NKU/E2FGVI) - Efficient flow-guided video inpainting
+- [ProPainter](https://github.com/sczhou/ProPainter) - Progressive video inpainting framework
 
-This code is based on [E<sup>2</sup>FGVI](https://github.com/MCG-NKU/E2FGVI) and [Propainter](https://github.com/sczhou/ProPainter).
+<div align="center">
+  <p>✨ The WRV2 project is maintained by <a href="https://mp.weixin.qq.com/s/ThSF4cpnCYPZ_DHiBtviBA">Multimedia Understanding Laboratory, Tianjin University</a> ✨</p>
+  <a href="https://github.com/Suyimu/WRV2/stargazers"><img src="https://img.shields.io/github/stars/Suyimu/WRV2?style=social"></a>
+  <a href="https://github.com/Suyimu/WRV2/issues"><img src="https://img.shields.io/github/issues/Suyimu/WRV2"></a>
+</div>
 
