@@ -45,7 +45,7 @@ Download models from **[Release V0.1.0](https://pan.quark.cn/s/02a9c6a1d7a6)** (
 *First-time users*: Models will auto-download during initial inference if not found.
 
 ### 4. Run Inference
-**Example Test** (using sample data in [`inputs/`](./inputs)):
+**Example Test** (using sample data in [`inputs/`](./Raformer/inputs)):
 ```bash
 python inference_Raformer.py \
   --video inputs/wire_removal/GT/8m56s \
