@@ -1,42 +1,74 @@
-# **Raformer: Redundancy-Aware Transformer for Video Wire Inpainting**
-Welcome to the official repository for the Raformer project. This innovative model is engineered to address the challenge of removing wires from video sequences, showcasing its capabilities through extensive testing on our Wire Removal Video Dataset 2 (WRV2).
-# News
-We are excited to announce that the Raformer model code is now publicly **available for testing**. **Additionally, the pre-trained model is provided**. The full training code will be released within one week after the paper is officially published. 
+# Raformer: Redundancy-Aware Transformer for Video Wire Inpainting 🎬
 
-# Get Started
-### 1. Clone the Repository and Navigate to the Folder
+[![Project Status: Active](https://img.shields.io/badge/Status-Active-brightgreen)](https://github.com/Suyimu/WRV2)
+[![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0%2B-orange)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+Welcome to the official repository for the **Raformer** project. This innovative model is engineered to address the challenge of removing wires from video sequences, showcasing its capabilities through extensive testing on our Wire Removal Video Dataset 2 (WRV2).
+
+---
+
+## 🚀 Latest Updates (2025.02.16)
+#### **2025.02.16 - Public Beta Release!**
+- **Model Inference Code & Pre-trained Weights** now available!  
+  → Test Raformer on your own videos with just 4 steps!
+- **Full Training Code** scheduled for release within 1 week after paper publication.
+
+---
+
+## ⚡ Quick Start
+
+### 1. Clone Repository
 ```bash
 git clone https://github.com/Suyimu/WRV2.git
 cd Raformer
 ```
 
-###  2. Set Up Conda Environment and Install Dependencies
-### Create and activate a new conda environment
+### 2. Environment Setup
 ```bash
+# Create conda environment
 conda create -n Raformer python=3.8 -y
 conda activate Raformer
-```
-### Install dependencies
-```bash
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-- CUDA >= 9.2
-- PyTorch >= 2.0
-- Torchvision >= 0.8.2
-- Other required packages in `requirements.txt`
-     
-### Prepare Pretrained Models
-Download the pretrained models from [Releases V0.1.0](https://pan.quark.cn/s/02a9c6a1d7a6) into the `weights` folder. (Models will also be downloaded automatically during the first inference.) [Link password: 78NW]
+**System Requirements**:  
+- CUDA >= 9.2  
+- PyTorch >= 2.0  
+- Torchvision >= 0.8.2  
 
-### Test
-We provide example videos in the [`inputs`](./inputs) folder. 
-Run the following command to test the model:
-```shell
-python inference_Raformer.py --video inputs/wire_removal/GT/8m56s --mask inputs/wire_removal/Wire_Masks/8m56s
+### 3. Download Pre-trained Models
+Download models from **[Release V0.1.0](https://pan.quark.cn/s/02a9c6a1d7a6)** (Password: `78NW`) and place them in `./weights/`.  
+
+*First-time users*: Models will auto-download during initial inference if not found.
+
+### 4. Run Inference
+**Example Test** (using sample data in [`inputs/`](./inputs)):
+```bash
+python inference_Raformer.py \
+  --video inputs/wire_removal/GT/8m56s \
+  --mask inputs/wire_removal/Wire_Masks/8m56s
 ```
 
+**Custom Video Processing**:  
+Prepare your data as:
+```
+📁 your_video/
+  ├── frame_0001.png
+  ├── frame_0002.png
+  └── ... (sequential frames)
+📁 your_mask/  # Optional for multi-mask scenarios
+  ├── mask_0001.png
+  ├── mask_0002.png
+  └── ... (binary masks, white=wire)
+```
+Run with:
+```bash
+python inference_Raformer.py --video path/to/frames --mask path/to/masks
+```
+---
 # **Wire Removal Video Datasets 2 (WRV2)**
 
 The WRV2 dataset is meticulously assembled to support developing and evaluating video inpainting algorithms aimed specifically at wire removal. This challenging task is critical for enhancing visual aesthetics in various scenes.
