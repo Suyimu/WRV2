@@ -129,8 +129,8 @@ This dataset is released for **academic research only**. Commercial use requires
 
 ## 🙏 Acknowledgement
 We build upon these excellent works:
-- [E²FGVI](https://github.com/MCG-NKU/E2FGVI) - Efficient flow-guided video inpainting
-- [ProPainter](https://github.com/sczhou/ProPainter) - Progressive video inpainting framework
+- [E²FGVI](https://github.com/MCG-NKU/E2FGVI) - Towards An End-to-End Framework for Flow-Guided Video Inpainting
+- [ProPainter](https://github.com/sczhou/ProPainter) - ProPainter: Improving Propagation and Transformer for Video Inpainting
 
 <div align="center">
   <p>✨ The WRV2 project is maintained by <a href="https://mp.weixin.qq.com/s/ThSF4cpnCYPZ_DHiBtviBA">Multimedia Understanding Laboratory, Tianjin University</a> ✨</p>
