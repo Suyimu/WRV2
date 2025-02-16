@@ -1,6 +1,7 @@
 # **Raformer: Redundancy-Aware Transformer for Video Wire Inpainting**
 Welcome to the official repository for the Raformer project. This innovative model is engineered to address the challenge of removing wires from video sequences, showcasing its capabilities through extensive testing on our Wire Removal Video Dataset 2 (WRV2).
-We are excited to announce that the Raformer model code is now publicly available for testing. Additionally, the pre-trained model is provided. The full training code will be released within one week after the paper is officially published. 
+# News
+We are excited to announce that the Raformer model code is now publicly **available for testing**. **Additionally, the pre-trained model is provided**. The full training code will be released within one week after the paper is officially published. 
 
 # Get Started
 ### 1. Clone the Repository and Navigate to the Folder
