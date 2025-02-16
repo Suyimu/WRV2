@@ -1,6 +1,8 @@
-Implementation Release
-We are committed to supporting the academic and professional community by sharing our resources and tools. To this end, we plan to publicly release the implementation of the Raformer model once our accompanying research paper is officially accepted for publication.
+# **Implementation Release**
 
-Upcoming Availability
-The source code, including detailed documentation and usage examples, will be made available here on this GitHub repository. Our goal is to provide a comprehensive toolkit that researchers and practitioners can use to further explore, experiment, and extend the capabilities of video wire inpainting technology.
+We are pleased to announce that the source code for the Raformer model, along with the pre-trained model, is now publicly available on this GitHub repository. As of today, February 16, 2025, the code and pre-trained models are accessible for use. The training code will be released within one week after the paper is officially published.  
+
+## **Upcoming Availability**  
+
+The source code includes detailed documentation and usage examples to assist researchers and practitioners in exploring, experimenting, and extending the capabilities of video wire inpainting technology. Our goal is to provide a comprehensive toolkit that fosters further advancements in the field.
 
