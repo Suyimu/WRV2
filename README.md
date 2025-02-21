@@ -76,7 +76,7 @@ python inference_Raformer.py --video path/to/frames --mask path/to/masks
 ## 📥 Download Links
 | Version | Size | Link | Access |
 |---------|------|------|--------|
-| Standard | 200GB | [Quark Cloud](https://pan.quark.cn/s/63522988eedf) | Direct Download |
+| Standard | 53GB | [Quark Cloud](https://pan.quark.cn/s/63522988eedf) | Direct Download |
 | 4K UHD | ~2TB | Contact Authors | Special Arrangement |
 
 **Need higher resolution?**  
