@@ -8,12 +8,11 @@ Welcome to the official repository for the **Raformer** project. This innovative
 
 ---
 
-## 🚀 Latest Updates (2025.02.16)
-#### **2025.02.16 - Public Beta Release!**
-- **Model Inference Code & Pre-trained Weights** now available!  
-  → Test Raformer on your own videos with just 4 steps!
-- **Full Training Code** scheduled for release within 1 week after paper publication.
 
+## 🚀 Latest Updates (2025.03.23)
+#### **2025.03.22 - Official Paper Release & System Updates!**
+- 🎉 **Paper Published in IEEE TIP!**  
+  → Our work "*Raformer*" is now officially published in *IEEE Transactions on Image Processing*!  
 ---
 
 ## ⚡ Quick Start
@@ -67,6 +66,21 @@ Run with:
 python inference_Raformer.py --video path/to/frames --mask path/to/masks
 ```
 ---
+
+
+##  **Training Workflow Overview**  
+1. **Base train code**
+ - Please refer to [ProPainter](https://github.com/sczhou/ProPainter)
+2. **Critical Adaptation**
+ - Replace ProPainter's default mask generator with the **wire-shaped mask function** from `Raformer/core/utils.py`.  
+（→ Training implementation: **Modified ProPainter workflow** with wire-mask generation 🔄  ）
+3. **Data Preparation**  
+   - Configure the WRV2 dataset (no pre-generated masks required).
+4. **Launch Training**  
+   - Run 350K iterations with dynamic wire-mask generation enabled.  
+*Designed for seamless integration and minimal code modification.*
+
+  
 # 🎥 Wire Removal Video Dataset 2 (WRV2) 
 <div align="center">
   <img src="dataset_example.png" width="80%" alt="WRV2 Dataset Samples">
