@@ -113,14 +113,16 @@ Explore our initial wire removal benchmark dataset with different challenge conf
 ## 📜 Citation
 If this research benefits your work or involves the use of this dataset, please consider citing the following paper:
    ```bibtex
-@misc{ji2024raformer,
-      title={Raformer: Redundancy-Aware Transformer for Video Wire Inpainting}, 
-      author={Zhong Ji and Yimu Su and Yan Zhang and Jiacheng Hou and Yanwei Pang and Jungong Han},
-      year={2024},
-      eprint={2404.15802},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
+@ARTICLE{10930654,
+  author={Ji, Zhong and Su, Yimu and Zhang, Yan and Hou, Jiacheng and Pang, Yanwei and Han, Jungong},
+  journal={IEEE Transactions on Image Processing}, 
+  title={Raformer: Redundancy-Aware Transformer for Video Wire Inpainting}, 
+  year={2025},
+  volume={34},
+  number={},
+  pages={1795-1809},
+  keywords={Wire;Transformers;Films;Visualization;Training;TV;Production;Manuals;Context modeling;Computational modeling;Video wire inpainting;video inpainting;video transformer;redundant elimination},
+  doi={10.1109/TIP.2025.3550038}}
 ```
 
 ## 📃 License
