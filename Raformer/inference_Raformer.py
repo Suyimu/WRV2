@@ -22,6 +22,23 @@ from urllib.parse import urlparse
 
 warnings.filterwarnings("ignore")
 # resize frames
+# def resize_frames(frames, size=None):    
+#     if size is not None:
+#         out_size = size
+#         process_size = (out_size[0]-out_size[0]%8, out_size[1]-out_size[1]%8)
+#         frames = [f.resize(process_size) for f in frames]
+#     else:
+#         out_size = frames[0].size
+#         process_size = (out_size[0]-out_size[0]%8, out_size[1]-out_size[1]%8)
+#         if not out_size == process_size:
+#             frames = [f.resize(process_size) for f in frames]
+        
+#     return frames, process_size, out_size
+def imwrite(img, file_path):
+    """Helper function to save images"""
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    cv2.imwrite(file_path, img)
+
 def resize_frames(frames, size=None):    
     if size is not None:
         out_size = size
@@ -35,6 +52,46 @@ def resize_frames(frames, size=None):
         
     return frames, process_size, out_size
 
+def resize_frames_adaptive(frames, size=None):
+    """
+    Adaptive frame resizing that preserves original resolution with minimal padding
+    """
+    import torch.nn.functional as F
+    from PIL import Image
+    
+    original_size = frames[0].size  # (width, height)
+    
+    if size is not None:
+        # Custom size specified
+        out_size = size
+        process_size = (out_size[0]-out_size[0]%8, out_size[1]-out_size[1]%8)
+        frames = [f.resize(process_size) for f in frames]
+        return frames, process_size, out_size, None
+    else:
+        # Use original resolution with adaptive padding
+        out_size = original_size
+        w, h = original_size
+        
+        # Calculate padding needed to make dimensions divisible by 8
+        pad_w = (8 - w % 8) % 8
+        pad_h = (8 - h % 8) % 8
+        
+        if pad_w > 0 or pad_h > 0:
+            # Add padding
+            process_size = (w + pad_w, h + pad_h)
+            padded_frames = []
+            for frame in frames:
+                # Create new image with padding
+                padded_img = Image.new('RGB', process_size, (0, 0, 0))
+                padded_img.paste(frame, (0, 0))
+                padded_frames.append(padded_img)
+            frames = padded_frames
+            padding_info = (pad_w, pad_h)  # Store padding info for later removal
+        else:
+            process_size = original_size
+            padding_info = None
+        
+        return frames, process_size, out_size, padding_info
 
 #  read frames from video
 def read_frame_from_videos(frame_root):
@@ -75,7 +132,12 @@ def read_mask(mpath, length, size, flow_mask_dilates=8, mask_dilates=5):
     else:  
         mnames = sorted(os.listdir(mpath))
         for mp in mnames:
-            masks_img.append(Image.open(os.path.join(mpath, mp)))
+            # masks_img.append(Image.open(os.path.join(mpath, mp)))
+            mask_path = os.path.join(mpath, mp)
+            if os.path.isfile(mask_path):
+                masks_img.append(Image.open(mask_path))
+            else:
+                print(f"Skipping directory: {mask_path}")
           
     for mask_img in masks_img:
         if size is not None:
@@ -163,6 +225,31 @@ def get_ref_index(mid_neighbor_id, neighbor_ids, length, ref_stride=10, ref_num=
                 ref_index.append(i)
     return ref_index
 
+def remove_padding(frames, padding_info, original_size):
+    """
+    Remove padding from frames to restore original resolution
+    """
+    if padding_info is None:
+        return frames
+    
+    pad_w, pad_h = padding_info
+    orig_w, orig_h = original_size
+    
+    # Remove padding from each frame
+    restored_frames = []
+    for frame in frames:
+        if isinstance(frame, np.ndarray):
+            # For numpy arrays (processed frames)
+            if pad_h > 0:
+                frame = frame[:orig_h, :, :]
+            if pad_w > 0:
+                frame = frame[:, :orig_w, :]
+        else:
+            # For PIL Images
+            frame = frame.crop((0, 0, orig_w, orig_h))
+        restored_frames.append(frame)
+    
+    return restored_frames
 
 
 if __name__ == '__main__':
@@ -179,9 +266,9 @@ if __name__ == '__main__':
     parser.add_argument(
         "--resize_ratio", type=float, default=1.0, help='Resize scale for processing video.')
     parser.add_argument(
-        '--height', type=int, default=240, help='Height of the processing video.')
+        '--height', type=int, default=-1, help='Height of the processing video.')
     parser.add_argument(
-        '--width', type=int, default=432, help='Width of the processing video.')
+        '--width', type=int, default=-1, help='Width of the processing video.')
     parser.add_argument(
         '--mask_dilation', type=int, default=4, help='Mask dilation for video and flow masking.')
     parser.add_argument(
@@ -211,13 +298,31 @@ if __name__ == '__main__':
     use_half = True if args.fp16 else False 
 
 
-    frames, fps, size, video_name = read_frame_from_videos(args.video)
-    if not args.width == -1 and not args.height == -1:
-        size = (args.width, args.height)
-    if not args.resize_ratio == 1.0:
-        size = (int(args.resize_ratio * size[0]), int(args.resize_ratio * size[1]))
+    # frames, fps, size, video_name = read_frame_from_videos(args.video)
+    # if not args.width == -1 and not args.height == -1:
+    #     size = (args.width, args.height)
+    # if not args.resize_ratio == 1.0:
+    #     size = (int(args.resize_ratio * size[0]), int(args.resize_ratio * size[1]))
 
-    frames, size, out_size = resize_frames(frames, size)
+    # frames, size, out_size = resize_frames(frames, size)
+    frames, fps, original_size, video_name = read_frame_from_videos(args.video)
+
+    # Handle resolution logic
+    if args.width != -1 and args.height != -1:
+        # Custom resolution specified
+        size = (args.width, args.height)
+        if not args.resize_ratio == 1.0:
+            size = (int(args.resize_ratio * size[0]), int(args.resize_ratio * size[1]))
+        frames, process_size, out_size, padding_info = resize_frames_adaptive(frames, size)
+    else:
+        # Use original resolution (adaptive)
+        if not args.resize_ratio == 1.0:
+            size = (int(args.resize_ratio * original_size[0]), int(args.resize_ratio * original_size[1]))
+            frames, process_size, out_size, padding_info = resize_frames_adaptive(frames, size)
+        else:
+            frames, process_size, out_size, padding_info = resize_frames_adaptive(frames, None)
+
+    size = process_size  # Use processed size for the rest of the pipeline
     
     fps = args.save_fps if fps is None else fps
     save_root = os.path.join(args.output, video_name)
@@ -262,7 +367,7 @@ if __name__ == '__main__':
     ##############################################
     fix_raft = RAFT_bi("weights\raft-things.pth", device)
     
-    fix_flow_complete = RecurrentFlowCompleteNet("weights/Rec_gen_700000_wire.pth")
+    fix_flow_complete = RecurrentFlowCompleteNet("weights\Rec_gen_700000_wire.pth")
     for p in fix_flow_complete.parameters():
         p.requires_grad = False
     fix_flow_complete.to(device)
@@ -436,10 +541,25 @@ if __name__ == '__main__':
         torch.cuda.empty_cache()
                 
     # save each frame
+    # if args.save_frames:
+    #     for idx in range(video_length):
+    #         f = comp_frames[idx]
+    #         f = cv2.resize(f, out_size, interpolation = cv2.INTER_CUBIC)
+    #         f = cv2.cvtColor(f, cv2.COLOR_BGR2RGB)
+    #         img_save_root = os.path.join(save_root, 'frames', str(idx).zfill(4)+'.png')
+    #         imwrite(f, img_save_root)
+    # Remove padding if it was added to restore original resolution
+    if padding_info is not None:
+        comp_frames = remove_padding(comp_frames, padding_info, out_size)
+        masked_frame_for_save = remove_padding(masked_frame_for_save, padding_info, out_size)
+
+    # save each frame
     if args.save_frames:
         for idx in range(video_length):
             f = comp_frames[idx]
-            f = cv2.resize(f, out_size, interpolation = cv2.INTER_CUBIC)
+            # Only resize if out_size differs from current frame size
+            if f.shape[:2][::-1] != out_size:  # f.shape is (H,W,C), out_size is (W,H)
+                f = cv2.resize(f, out_size, interpolation = cv2.INTER_CUBIC)
             f = cv2.cvtColor(f, cv2.COLOR_BGR2RGB)
             img_save_root = os.path.join(save_root, 'frames', str(idx).zfill(4)+'.png')
             imwrite(f, img_save_root)
@@ -450,8 +570,13 @@ if __name__ == '__main__':
     #     masked_frame_for_save = [i[10:-10,10:-10] for i in masked_frame_for_save]
     
     # save videos frame
-    masked_frame_for_save = [cv2.resize(f, out_size) for f in masked_frame_for_save]
-    comp_frames = [cv2.resize(f, out_size) for f in comp_frames]
+    # masked_frame_for_save = [cv2.resize(f, out_size) for f in masked_frame_for_save]
+    # comp_frames = [cv2.resize(f, out_size) for f in comp_frames]
+    # imageio.mimwrite(os.path.join(save_root, 'masked_in.mp4'), masked_frame_for_save, fps=fps, quality=7)
+    # imageio.mimwrite(os.path.join(save_root, 'inpaint_out.mp4'), comp_frames, fps=fps, quality=7)
+    # save videos frame - only resize if necessary
+    masked_frame_for_save = [cv2.resize(f, out_size) if f.shape[:2][::-1] != out_size else f for f in masked_frame_for_save]
+    comp_frames = [cv2.resize(f, out_size) if f.shape[:2][::-1] != out_size else f for f in comp_frames]
     imageio.mimwrite(os.path.join(save_root, 'masked_in.mp4'), masked_frame_for_save, fps=fps, quality=7)
     imageio.mimwrite(os.path.join(save_root, 'inpaint_out.mp4'), comp_frames, fps=fps, quality=7)
     
